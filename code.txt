@@ -1,0 +1,281 @@
+int IR1 = 13; //
+int IR2 = 0; //
+int IR3 = 1;
+int IR4 = 2;
+
+int val = 0;
+#define buzzer 10
+
+int val1 = 1;
+int val2 = 1;
+int val3 = 1;
+int val4 = 1;
+
+int R1 = 16;
+int Y1 = 15;
+int G1 = 14;
+
+int R2 = 17;
+int Y2 = 18;
+int G2 = 19;
+
+int R4 = 3;
+int Y4 = 4;
+int G4 = 5;
+
+int R3 = 6;
+int Y3 = 7;
+int G3 = 8;
+
+void setup() {
+
+  pinMode(buzzer, OUTPUT);
+
+  pinMode(R1, OUTPUT); // declare LED as output
+  pinMode(Y1, OUTPUT); // declare LED as output
+  pinMode(G1, OUTPUT); // declare LED as output
+
+  pinMode(R2, OUTPUT); // declare LED as output
+  pinMode(Y2, OUTPUT); // declare LED as output
+  pinMode(G2, OUTPUT); // declare LED as output
+
+  pinMode(R3, OUTPUT); // declare LED as output
+  pinMode(Y3, OUTPUT); // declare LED as output
+  pinMode(G3, OUTPUT); // declare LED as output
+
+  pinMode(R4, OUTPUT); // declare LED as output
+  pinMode(Y4, OUTPUT); // declare LED as output
+  pinMode(G4, OUTPUT); // declare LED as output
+
+  pinMode(IR1, INPUT); // declare Infrared sensor as input
+  pinMode(IR2, INPUT); // declare Infrared sensor as input
+  pinMode(IR3, INPUT); // declare Infrared sensor as input
+  pinMode(IR4, INPUT); // declare Infrared sensor as input
+  Serial.begin(9600);
+}
+
+void loop() {
+  //   int val_digital = digitalRead(sound_digital);
+  //   int val_analog = analogRead(sound_analog);
+  //     Serial.print(val_analog);
+  //  Serial.print("\t");
+  //  Serial.println(val_digital);
+
+  int sensorValue = analogRead(A7);
+  val = sensorValue / 10;
+
+  val1 = digitalRead(IR1); // read input value
+  val2 = digitalRead(IR2); // read input value
+  val3 = digitalRead(IR3); // read input value
+  val4 = digitalRead(IR4); // read input value
+  Serial.print(val1);
+  Serial.print("  ");
+  Serial.print(val2);
+  Serial.print("  ");
+  Serial.print(val3);
+  Serial.print("  ");
+  Serial.print(val4);
+  Serial.print("  ");
+  Serial.println(val);
+  if (val > 20)
+  {
+    digitalWrite(buzzer,HIGH);
+    //tone(buzzer, 1000, 200);
+    delay(5000);
+    digitalWrite(buzzer,LOW);
+    //noTone(buzzer);
+  }
+
+
+  if (val1 == 1 and val2 == 1 and val3 == 1 and val4 == 1)
+  {
+    def();
+
+  }
+  else if ( val1 == 0 and val2 == 1 and val3 == 1 and val4 == 1)
+  {
+    IR1G();
+    delay(5000);
+    IR1R();
+  }
+  else if ( val1 == 1 and val2 == 0 and val3 == 1 and val4 == 1)
+  {
+    IR2G();
+    delay(5000);
+    IR2R();
+  }
+  else if ( val1 == 1 and val2 == 1 and val3 == 0 and val4 == 1)
+  {
+    IR3G();
+    delay(5000);
+    IR3R();
+  }
+  else if ( val1 == 1 and val2 == 1 and val3 == 1 and val4 == 0)
+  {
+    IR4G();
+    delay(5000);
+    IR4R();
+  }
+
+  else {
+    def();
+  }
+
+
+}
+void def() {
+  IR1G();
+  delay(1000);
+  IR1R();
+  delay (1000);
+  IR2G();
+  delay(1000);
+  IR2R();
+  delay (1000);
+  IR3G();
+  delay(1000);
+  IR3R();
+  delay (1000);
+  IR4G();
+  delay(1000);
+  IR4R();
+  delay (1000);
+}
+void IR1G()
+{
+  Serial.println("G1");
+  digitalWrite(G1, LOW);
+  digitalWrite(R1, LOW);
+  digitalWrite(Y1, HIGH);
+  delay (1000);
+  digitalWrite(Y1, LOW);
+  digitalWrite(R1, LOW);
+  digitalWrite(G1, HIGH);
+ 
+    tone(buzzer, 1000, 200);
+    delay(100);
+    noTone(buzzer);
+     delay (1000);
+}
+void IR1R()
+{
+  Serial.println("R1");
+  digitalWrite(G1, LOW);
+  digitalWrite(R1, LOW);
+  digitalWrite(Y1, HIGH);
+  delay (1000);
+  digitalWrite(Y1, LOW);
+  digitalWrite(G1, LOW);
+  digitalWrite(R1, HIGH);
+  delay (1000);
+}
+
+void IR2G()
+{
+  Serial.println("G2");
+  digitalWrite(G2, LOW);
+  digitalWrite(R2, LOW);
+  digitalWrite(Y2, HIGH);
+  delay (1000);
+  digitalWrite(Y2, LOW);
+  digitalWrite(R2, LOW);
+  digitalWrite(G2, HIGH);
+
+      tone(buzzer, 1000, 200);
+    delay(100);
+    
+    noTone(buzzer);
+     delay (300);
+        tone(buzzer, 1000, 200);
+    delay(100);
+    noTone(buzzer);
+ delay (1000);
+}
+void IR2R()
+{
+  Serial.println("R2");
+  digitalWrite(G2, LOW);
+  digitalWrite(R2, LOW);
+  digitalWrite(Y2, HIGH);
+  delay (1000);
+  digitalWrite(Y2, LOW);
+  digitalWrite(G2, LOW);
+  digitalWrite(R2, HIGH);
+  delay (1000);
+}
+void IR3G()
+{
+  Serial.println("G3");
+  digitalWrite(G3, LOW);
+  digitalWrite(R3, LOW);
+  digitalWrite(Y3, HIGH);
+  delay (1000);
+  digitalWrite(Y3, LOW);
+  digitalWrite(R3, LOW);
+  digitalWrite(G3, HIGH);
+
+      tone(buzzer, 1000, 200);
+    delay(100);
+    noTone(buzzer);
+         delay (300);
+        tone(buzzer, 1000, 200);
+    delay(100);
+    noTone(buzzer);
+         delay (300);
+        tone(buzzer, 1000, 200);
+    delay(100);
+    noTone(buzzer);  
+    delay (1000);
+}
+void IR3R()
+{
+  Serial.println("R3");
+  digitalWrite(G3, LOW);
+  digitalWrite(R3, LOW);
+  digitalWrite(Y3, HIGH);
+  delay (1000);
+  digitalWrite(Y3, LOW);
+  digitalWrite(G3, LOW);
+  digitalWrite(R3, HIGH);
+  delay (1000);
+}
+void IR4G()
+{
+  Serial.println("G4");
+  digitalWrite(G4, LOW);
+  digitalWrite(R4, LOW);
+  digitalWrite(Y4, HIGH);
+  delay (1000);
+  digitalWrite(Y4, LOW);
+  digitalWrite(R4, LOW);
+  digitalWrite(G4, HIGH);
+
+      tone(buzzer, 1000, 200);
+    delay(100);
+    noTone(buzzer);
+         delay (300);
+        tone(buzzer, 1000, 200);
+    delay(100);
+    noTone(buzzer);
+         delay (300);
+        tone(buzzer, 1000, 200);
+    delay(100);
+    noTone(buzzer);
+         delay (300);
+        tone(buzzer, 1000, 200);
+    delay(100);  
+    noTone(buzzer);
+delay (1000);
+}
+void IR4R()
+{
+  Serial.println("R4");
+  digitalWrite(G4, LOW);
+  digitalWrite(R4, LOW);
+  digitalWrite(Y4, HIGH);
+  delay (1000);
+  digitalWrite(Y4, LOW);
+  digitalWrite(G4, LOW);
+  digitalWrite(R4, HIGH);
+  delay (1000);
+}
